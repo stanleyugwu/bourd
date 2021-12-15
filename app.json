@@ -1,5 +1,6 @@
 {
   "expo": {
+    "entryPoint": "./src/Index.js",
     "name": "Bourd",
     "slug": "Bourd",
     "version": "1.0.0",
