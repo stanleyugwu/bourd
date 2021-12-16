@@ -1,16 +1,18 @@
 import "react-native-gesture-handler";
 import React from "react";
-import { Text, View } from "react-native";
 import { registerRootComponent } from "expo";
-import {
-  NavigationContainer,
-  useNavigation,
-  useTheme,
-} from "@react-navigation/native";
+
+//navgation helpers
+import { NavigationContainer, Theme } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
+
+//libraries and screens
 import tw from "./library/tailwind";
+import Projects from "./screens/Projects";
 
 const Stack = createStackNavigator();
+
+/** @type {Theme} */
 const appTheme = {
   colors: {
     background: "#f6f6f6",
@@ -33,31 +35,11 @@ const navigatorScreenOptions = {
   statusBarStyle: "light",
 };
 
-function Home() {
-  const navigation = useNavigation();
-  return (
-    <View>
-      <Text onPress={() => navigation.navigate("Login")}>HOME</Text>
-    </View>
-  );
-}
-function Login() {
-  const navigation = useNavigation();
-  console.log(navigation.getState());
-  console.log(useTheme());
-  return (
-    <View>
-      <Text>Login</Text>
-    </View>
-  );
-}
-
 function App() {
   return (
     <NavigationContainer theme={appTheme}>
       <Stack.Navigator screenOptions={navigatorScreenOptions}>
-        <Stack.Screen name="Home" component={Home} />
-        <Stack.Screen name="Login" component={Login} />
+        <Stack.Screen name="Projects" component={Projects} />
       </Stack.Navigator>
     </NavigationContainer>
   );
