@@ -1,8 +1,10 @@
 {
   "expo": {
+    "entryPoint": "./src/Index.js",
     "name": "Bourd",
     "slug": "Bourd",
     "version": "1.0.0",
+    "androidStatusBar": {"backgroundColor": "#121330","barStyle": "light-content"},
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
