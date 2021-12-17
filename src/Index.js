@@ -2,6 +2,10 @@ import "react-native-gesture-handler";
 import React from "react";
 import { registerRootComponent } from "expo";
 
+//redux store resources
+import {Provider} from 'react-redux';
+import store from "./store";
+
 //navgation helpers
 import { NavigationContainer, Theme } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
@@ -37,11 +41,13 @@ const navigatorScreenOptions = {
 
 function App() {
   return (
-    <NavigationContainer theme={appTheme}>
-      <Stack.Navigator screenOptions={navigatorScreenOptions}>
-        <Stack.Screen name="Projects" component={Projects} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <Provider store={store}>
+      <NavigationContainer theme={appTheme}>
+        <Stack.Navigator screenOptions={navigatorScreenOptions}>
+          <Stack.Screen name="Projects" component={Projects} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </Provider>
   );
 }
 
