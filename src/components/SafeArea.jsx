@@ -1,4 +1,5 @@
 import React from "react";
+import { ScrollView } from "react-native-gesture-handler";
 import {
   SafeAreaView,
   SafeAreaViewProps,
@@ -12,11 +13,13 @@ const SafeArea = (props) => {
   const { children, style, others } = props;
   return (
     <SafeAreaView
-      style={[{ padding:10 }, style]}
+      style={[{ padding:5 }, style]}
       accessibilityLabel="screen wrapper"
       {...others}
     >
-      {children}
+      <ScrollView contentContainerStyle={{padding:5}}>
+        {children}
+      </ScrollView>
     </SafeAreaView>
   );
 };
