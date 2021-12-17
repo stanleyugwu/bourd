@@ -12,7 +12,7 @@ const SafeArea = (props) => {
   const { children, style, others } = props;
   return (
     <SafeAreaView
-      style={[{ paddingHorizontal: 20, paddingVertical: 10 }, style]}
+      style={[{ padding:10 }, style]}
       accessibilityLabel="screen wrapper"
       {...others}
     >
