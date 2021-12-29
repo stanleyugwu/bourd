@@ -8,7 +8,7 @@ import store from "./store";
 
 //navgation helpers
 import { NavigationContainer, Theme } from "@react-navigation/native";
-import { createStackNavigator } from "@react-navigation/stack";
+import { createStackNavigator, StackNavigationOptions } from "@react-navigation/stack";
 
 //libraries and screens
 import tw from "./library/tailwind";
@@ -16,8 +16,7 @@ import Projects from "./screens/Projects";
 
 const Stack = createStackNavigator();
 
-/** @type {Theme} */
-const appTheme = {
+const appTheme:Theme = {
   colors: {
     background: "#f6f6f6",
     border: "#121330",
@@ -29,17 +28,16 @@ const appTheme = {
   dark: false,
 };
 
-/** @type {import("@react-navigation/stack").StackNavigationOptions} */
-const navigatorScreenOptions = {
+const navigatorScreenOptions:StackNavigationOptions = {
   headerTitleStyle: tw`text-white`,
   headerTintColor: tw.color("accent"),
   animationTypeForReplace: "push",
   animationEnabled: true,
-  animation: "slide_from_right",
-  statusBarStyle: "light",
+  // animation: "slide_from_right",
+  // statusBarStyle: "light",
 };
 
-function App() {
+function App():JSX.Element {
   return (
     <Provider store={store}>
       <NavigationContainer theme={appTheme}>

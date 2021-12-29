@@ -1,21 +1,24 @@
-import React from "react";
+import * as React from "react";
 import { StyleSheet, View, Platform, ViewStyle } from "react-native";
 
 /**
  * A HOC that adds `box-shadow` around passed component
- * @param {import('react').ReactComponentElement} Component Component to wrap
+ * @param {React.FunctionComponent | React.ComponentClass} Component Component to wrap
  * @param {ViewStyle} style Style to apply to parent `View`
  */
-const withBoxShadow = (Component, style = null) => {
-  return React.memo((props) => (
+
+const withBoxShadow = <ComponentProps extends object>(
+  Component: React.FC<ComponentProps> | React.ComponentClass<ComponentProps>,
+  style?: ViewStyle
+): React.NamedExoticComponent<ComponentProps> =>
+  React.memo((props) => (
     <View
       style={[styles.boxShadow, { backgroundColor: "white" }, style]}
       accessibilityLabel="box-shadow wrapper"
     >
-      <Component {...props} />
+      <Component {...(props as ComponentProps)} />
     </View>
   ));
-};
 
 export const styles = StyleSheet.create({
   boxShadow:

@@ -1,18 +1,18 @@
 import React from "react";
 import { Text as _Text, TextProps } from "react-native";
+import { ClassInput } from "tailwind-react-native-classnames";
 import tw from "../library/tailwind";
 
 /**
  * Renders text just like native `Text` component, but with some pre-defined styles
  * @param {TextProps} props
  */
-const Text = (props) => {
-  const { style, ...others } = props;
+const Text = ({ style, ...rest }:TextProps):JSX.Element => {
   return (
     <_Text
       accessibilityRole="text"
-      style={tw.style(`text-black text-base`, style)}
-      {...others}
+      style={tw.style(`text-black text-base`, style as ClassInput)}
+      {...rest}
     />
   );
 };
@@ -20,13 +20,12 @@ const Text = (props) => {
 /**
  * Renders a titled-text, bigger than `Text` and with pre-defined theming
  */
-const Title = (props) => {
-  const { style, ...others } = props;
+const Title = ({ style, ...rest }:TextProps):JSX.Element => {
   return (
     <_Text
       accessibilityRole="text"
-      style={tw.style(`text-black text-xl`, { fontWeight: "700" }, style)}
-      {...others}
+      style={tw.style(`text-black text-xl`, { fontWeight: "700" }, style as ClassInput)}
+      {...rest}
     />
   );
 };
