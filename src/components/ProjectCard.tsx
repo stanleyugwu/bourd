@@ -16,6 +16,8 @@ dayjs.extend(relativeTime);
 export type ProjectCardProps = {
   /** Number of tasks the project has */
   numberOfTasks: number;
+  /** Unique `Id` of the project */
+  projectId:string;
   /** Number of tasks completed for the project */
   numberOfCompletedTasks: number;
   /** Title text to show as project name */
@@ -35,6 +37,7 @@ export type ProjectCardProps = {
  */
 let ProjectCard = ({
   numberOfTasks,
+  projectId,
   numberOfCompletedTasks,
   projectTitle,
   creationDate,
@@ -46,6 +49,7 @@ let ProjectCard = ({
     onPress={onPress}
     activeOpacity={0.9}
     style={tw.style(`max-w-md rounded-md`, containerStyle as ClassInput)}
+    nativeID={projectId}
   >
     <View style={tw.style(`pb-2`, containerStyle as ClassInput)}>
       <View
