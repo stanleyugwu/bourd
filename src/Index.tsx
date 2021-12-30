@@ -3,20 +3,24 @@ import React from "react";
 import { registerRootComponent } from "expo";
 
 //redux store resources
-import {Provider} from 'react-redux';
+import { Provider } from "react-redux";
 import store from "./store";
 
 //navgation helpers
 import { NavigationContainer, Theme } from "@react-navigation/native";
-import { createStackNavigator, StackNavigationOptions } from "@react-navigation/stack";
+import {
+  createStackNavigator,
+  StackNavigationOptions,
+} from "@react-navigation/stack";
 
 //libraries and screens
 import tw from "./library/tailwind";
-import Projects from "./screens/Projects";
+import ProjectsScreen from "./screens/Projects";
+import { ScreensNavigationParams } from "../types";
 
-const Stack = createStackNavigator();
+const Stack = createStackNavigator<ScreensNavigationParams>();
 
-const appTheme:Theme = {
+const appTheme: Theme = {
   colors: {
     background: "#f6f6f6",
     border: "#121330",
@@ -28,21 +32,25 @@ const appTheme:Theme = {
   dark: false,
 };
 
-const navigatorScreenOptions:StackNavigationOptions = {
+const navigatorScreenOptions: StackNavigationOptions = {
   headerTitleStyle: tw`text-white`,
   headerTintColor: tw.color("accent"),
-  animationTypeForReplace: "push",
+  animationTypeForReplace: "pop",
   animationEnabled: true,
+  transitionSpec: {
+    close: { animation: "spring", config: { friction: 10, tension:40 } },
+    open: { animation: "spring", config: { friction: 10, tension:40 } },
+  },
   // animation: "slide_from_right",
   // statusBarStyle: "light",
 };
 
-function App():JSX.Element {
+function App(): JSX.Element {
   return (
     <Provider store={store}>
       <NavigationContainer theme={appTheme}>
         <Stack.Navigator screenOptions={navigatorScreenOptions}>
-          <Stack.Screen name="Projects" component={Projects} />
+          <Stack.Screen name="Projects" component={ProjectsScreen} />
         </Stack.Navigator>
       </NavigationContainer>
     </Provider>
