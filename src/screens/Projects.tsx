@@ -81,8 +81,8 @@ const Projects = ({
       >
         <TouchableHighlight
           style={tw.style(
-            `bg-primary rounded-full mb-12 justify-center items-center content-center mx-16`,
-            { height: 75, width: 75, borderWidth: 3, borderColor: "#eee" }
+            `bg-primary rounded-xl mb-12 justify-center items-center content-center mx-16`,
+            { height: 70, width: 70, borderWidth: 3, borderColor: "#eee" }
           )}
           onPress={handleCreateNewProject}
           activeOpacity={0.7}
