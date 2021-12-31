@@ -1,5 +1,5 @@
 import * as React from "react";
-import { StyleSheet, View, Platform, ViewStyle } from "react-native";
+import { StyleSheet, View, Platform, ViewStyle, ViewProps } from "react-native";
 
 /**
  * A HOC that adds `box-shadow` around passed component
@@ -20,6 +20,20 @@ const withBoxShadow = <ComponentProps extends object>(
     </View>
   ));
 
+/** Component, non-HOC version of `withBoxShadow` */
+const BoxShadow = ({style, children, accessibilityLabel = "box-shadow wrapper"}: ViewProps): JSX.Element => (
+  <View
+    style={[
+      styles.boxShadow,
+      { backgroundColor: "white" },
+      style,
+    ]}
+    accessibilityLabel={accessibilityLabel}
+  >
+    {children}
+  </View>
+);
+
 export const styles = StyleSheet.create({
   boxShadow:
     Platform.OS == "ios"
@@ -37,4 +51,4 @@ export const styles = StyleSheet.create({
         },
 });
 
-export default withBoxShadow;
+export {withBoxShadow as default, BoxShadow};
