@@ -10,7 +10,7 @@ import { Ionicons as Icon } from "@expo/vector-icons";
 import { IoniconName } from "@expo/vector-icons/build/Ionicons";
 import Text from "./Text";
 import tw from "../library/tailwind";
-import { ClassInput } from "tailwind-react-native-classnames";
+import { BoxShadow } from "./HOC/withBoxShadow";
 
 export type ButtonProps = {
   /** Button label text */
@@ -21,6 +21,8 @@ export type ButtonProps = {
   accessibilityLabel?: string;
   /** Name of `Ionicons` icon to display */
   iconName?: IoniconName;
+  /** Whether to wrap componnt in box-shadow */
+  showShadow?: boolean;
   /** Whether to place icon left or right to button label */
   iconPosition?: "left" | "right";
   /** Button background color */
@@ -39,6 +41,7 @@ const Button = ({
   onPress,
   containerStyle,
   iconName,
+  showShadow = true,
   accessibilityLabel = "pressable button",
   iconPosition = "left",
   bgColor = tw.color("primary"),
@@ -53,19 +56,19 @@ const Button = ({
     />
   ) : null;
 
-  return (
+  /** Main `TouchableHighlight` component */
+  const innerComponent = (
     <TouchableHighlight
       accessibilityLabel={accessibilityLabel}
       accessibilityRole="button"
       activeOpacity={0.7}
       onPress={onPress}
-      style={tw.style(`rounded-md`, { elevation: 4 })}
+      style={tw.style(`rounded-md`)}
     >
       <View
         style={tw.style(
           { backgroundColor: bgColor as string },
-          `flex-row rounded-md max-w-md items-center p-2.5 h-12 justify-center`,
-          containerStyle as ClassInput
+          `flex-row rounded-md max-w-md items-center p-2.5 h-12 justify-center`
         )}
       >
         {iconPosition == "left" ? icon : null}
@@ -82,6 +85,16 @@ const Button = ({
         {iconPosition == "right" ? icon : null}
       </View>
     </TouchableHighlight>
+  );
+
+  return showShadow ? (
+    <BoxShadow accessibilityLabel={accessibilityLabel} style={containerStyle}>
+      {innerComponent}
+    </BoxShadow>
+  ) : (
+    <View style={containerStyle} accessibilityLabel={accessibilityLabel}>
+      {innerComponent}
+    </View>
   );
 };
 
