@@ -16,6 +16,7 @@ import {
 //libraries and screens
 import tw from "./library/tailwind";
 import ProjectsScreen from "./screens/Projects";
+import NewProjectScreen from "./screens/NewProject";
 import { ScreensNavigationParams } from "../types";
 
 const Stack = createStackNavigator<ScreensNavigationParams>();
@@ -51,6 +52,7 @@ function App(): JSX.Element {
       <NavigationContainer theme={appTheme}>
         <Stack.Navigator screenOptions={navigatorScreenOptions}>
           <Stack.Screen name="Projects" component={ProjectsScreen} />
+          <Stack.Screen name="NewProject" component={NewProjectScreen} options={{headerTitle:"Create New Project"}}/>
         </Stack.Navigator>
       </NavigationContainer>
     </Provider>
