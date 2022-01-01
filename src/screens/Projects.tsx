@@ -55,7 +55,7 @@ const Projects = ({
         style={{ height: "90%" }}
         contentContainerStyle={{ padding: 10, paddingBottom: 25 }}
       >
-        {projects.map((project) => {
+        {[...projects].reverse().map((project) => {
           let doneTasks: number = project.projectTasks.filter(
             (task) => task.taskStatus === "done"
           ).length;
