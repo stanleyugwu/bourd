@@ -17,7 +17,7 @@ const SafeArea = ({ children, style, ...rest }:SafeAreaViewProps & ViewProps):JS
       accessibilityLabel="screen wrapper"
       {...rest}
     >
-      <ScrollView contentContainerStyle={{padding:5}}>
+      <ScrollView contentContainerStyle={{padding:5}} keyboardShouldPersistTaps="handled" keyboardDismissMode="on-drag">
         {children}
       </ScrollView>
     </SafeAreaView>
