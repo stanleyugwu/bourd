@@ -61,9 +61,8 @@ const projectsSlice = createSlice({
         !payload.taskDescription ||
         !payload.taskStatus ||
         !payload.projectId ||
-        ["todo", "doing", "done"].indexOf(payload.taskStatus) === -1
-      )
-        return;
+        ["to-do", "doing", "done"].indexOf(payload.taskStatus) === -1
+      ) return
 
       state.forEach((project) => {
         if (project.projectId === payload.projectId) {
