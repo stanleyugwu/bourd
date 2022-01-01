@@ -31,7 +31,7 @@ const NewProject = ({
   const dispatch = useDispatch();
   // below variable will be dynamically assigned when new project is created
   // Its made global so other functions can read it
-  let newlyCreatedProject: Project;
+  let newlyCreatedProject:React.MutableRefObject<Project | undefined> = React.useRef();
 
   /** Inputs Validator */
   const validateForm = React.useCallback((): void => {
@@ -72,16 +72,16 @@ const NewProject = ({
 
     // Get newly created project
     projects = store.getState().projects;
-    newlyCreatedProject = projects[projects.length - 1];
+    newlyCreatedProject.current = projects[projects.length - 1];
 
     // Add the initial task to it
     if (
-      newlyCreatedProject &&
-      newlyCreatedProject?.projectName === values.projectName
+      newlyCreatedProject.current &&
+      newlyCreatedProject.current?.projectName === values.projectName
     ) {
       dispatch(
         addProjectTask({
-          projectId: newlyCreatedProject.projectId,
+          projectId: newlyCreatedProject.current.projectId,
           taskStatus: "to-do",
           taskDescription: values.initialTask,
         })
@@ -97,8 +97,8 @@ const NewProject = ({
       "Project Created Successfully!.",
       "\nDo you want to add more tasks?",
       [
-        { text: "Yes", onPress: handleAddMoreTask },
-        { text: "No", onPress: goToProjectsScreen },
+        { text: "YES", onPress: handleAddMoreTask },
+        { text: "NO", onPress: goToProjectsScreen },
       ]
     );
   }, Object.values(values));
@@ -133,8 +133,8 @@ const NewProject = ({
 
   /** Function to handle when user wants to add more task after project creation */
   const handleAddMoreTask = React.useCallback(() => {
-    navigation.navigate("NewProjectTask", {
-      projectId: newlyCreatedProject.projectId,
+    navigation.replace("NewProjectTask", {
+      projectId: newlyCreatedProject.current?.projectId as string,
     });
   }, []);
 
@@ -174,6 +174,7 @@ const NewProject = ({
       <TextInputField
         value={values.initialTask}
         fieldTitle="First task"
+        fieldTitleIcon="construct"
         placeholder="What do you need to do first?"
         onChangeText={(text) => {
           setFieldValue(text, "initialTask");
