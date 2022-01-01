@@ -22,6 +22,13 @@ type NewProject = {
   projectTasks: ProjectTask[];
 };
 
+/** Type for new project input fields */
+type NewProjectInputTypes = {
+  projectName: string;
+  projectDesc: string;
+  initialTask: string;
+};
+
 /** Described the type for the core properties of a project task */
 type ProjectTaskCore = {
   /** Description of the task to be carried out */
