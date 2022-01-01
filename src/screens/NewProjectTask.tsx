@@ -11,6 +11,7 @@ import Text, { Title } from "../components/Text";
 import Button from "../components/Button";
 import TextInputField from "../components/TextInputField";
 import { Ionicons as Icon } from "@expo/vector-icons";
+import withTile from "../components/HOC/withTile";
 
 /** Screen for creating new project tasks */
 const NewProjectTask = ({
@@ -100,4 +101,4 @@ const NewProjectTask = ({
   );
 };
 
-export default NewProjectTask;
+export default withTile(NewProjectTask);

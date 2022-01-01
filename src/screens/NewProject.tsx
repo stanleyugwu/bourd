@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { addProject, addProjectTask } from "../store/slices/projectsSlice";
 import { Alert } from "react-native";
 import store, { RootState } from "../store";
+import withTile from "../components/HOC/withTile";
 
 /** Initial input values for form fields */
 const initialInputValues = {
@@ -193,4 +194,4 @@ const NewProject = ({
   );
 };
 
-export default NewProject;
+export default withTile(NewProject);
