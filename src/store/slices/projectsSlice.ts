@@ -3,6 +3,7 @@ import {
   AddProjectTaskPayload,
   ModifyProjectPayload,
   ModifyProjectTaskPayload,
+  ModifyProjectTaskStatusPayload,
   NewProject,
   Project,
 } from "../../../types";
@@ -69,7 +70,7 @@ const projectsSlice = createSlice({
           project?.projectTasks?.push({
             taskId: Math.floor(Math.random() * Date.now()).toString(36),
             taskStatus: payload.taskStatus,
-            createdAt: new Date(),
+            createdAt: Date.now(),
             taskDescription: payload.taskDescription,
           });
         }
@@ -100,7 +101,7 @@ const projectsSlice = createSlice({
         !payload.taskDescription ||
         !payload.taskStatus ||
         !payload.taskId ||
-        ["todo", "doing", "done"].indexOf(payload.taskStatus) === -1
+        ["to-do", "doing", "done"].indexOf(payload.taskStatus) === -1
       )
         return;
 
@@ -116,6 +117,33 @@ const projectsSlice = createSlice({
         });
       });
     },
+    modifyProjectTaskStatus(
+      state,
+      action: PayloadAction<ModifyProjectTaskStatusPayload>
+    ): void {
+      let payload: ModifyProjectTaskStatusPayload = action.payload;
+
+      //assert correct payload was passed
+      if (
+        !(payload instanceof Object) ||
+        !payload.taskStatus ||
+        !payload.taskId ||
+        ["to-do", "doing", "done"].indexOf(payload.taskStatus) === -1
+      )
+        return;
+
+      let { taskId, taskStatus } = payload;
+      state.forEach((project) => {
+        project.projectTasks.forEach((task, index) => {
+          if (task.taskId === taskId) {
+            project.projectTasks[index] = {
+              ...task,
+              taskStatus,
+            };
+          }
+        });
+      });
+    },
   },
 });
 
@@ -126,6 +154,7 @@ export const {
   addProjectTask,
   removeProjectTask,
   modifyProjectTask,
+  modifyProjectTaskStatus
 } = projectsSlice.actions;
 
 export const projectSelector = (state: RootStateType, projectId: string) =>

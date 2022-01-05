@@ -70,6 +70,13 @@ type ModifyProjectTaskPayload = ProjectTaskCore & {
   taskId: string;
 };
 
+type ModifyProjectTaskStatusPayload = {
+  /** `Id` of project task to modify */
+  taskId: string;
+  /** New status to set for task */
+  taskStatus: taskStatus
+}
+
 type ProjectIdPayloadType = {
   projectId: string;
 };
