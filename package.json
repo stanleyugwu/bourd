@@ -1,5 +1,5 @@
 {
-  "main": "./src/Index.js",
+  "main": "./src/Index.tsx",
   "scripts": {
     "start": "expo start",
     "android": "expo start --android",
