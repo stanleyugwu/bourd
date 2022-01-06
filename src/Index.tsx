@@ -21,6 +21,7 @@ import NewProjectTaskScreen from "./screens/NewProjectTask";
 import { ScreensNavigationParams } from "../types";
 import ProjectScreen from "./screens/Project";
 import EditProjectScreen from "./screens/EditProject";
+import EditProjectTaskScreen from "./screens/EditProjectTask";
 
 const Stack = createStackNavigator<ScreensNavigationParams>();
 
@@ -59,6 +60,7 @@ function App(): JSX.Element {
           <Stack.Screen name="NewProjectTask" component={NewProjectTaskScreen} options={{headerTitle:"Create Project Task"}} />
           <Stack.Screen name="Project" component={ProjectScreen} />
           <Stack.Screen name="EditProject" component={EditProjectScreen} />
+          <Stack.Screen name="EditProjectTask" component={EditProjectTaskScreen} />
         </Stack.Navigator>
       </NavigationContainer>
     </Provider>
