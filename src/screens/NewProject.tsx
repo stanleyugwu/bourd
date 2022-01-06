@@ -8,7 +8,7 @@ import TextInputField from "../components/TextInputField";
 import Button from "../components/Button";
 import { useDispatch, useSelector } from "react-redux";
 import { addProject, addProjectTask } from "../store/slices/projectsSlice";
-import { Alert } from "react-native";
+import { Alert, Keyboard } from "react-native";
 import store, { RootState } from "../store";
 import withTile from "../components/HOC/withTile";
 
@@ -93,6 +93,7 @@ const NewProject = ({
       );
     }
 
+    Keyboard.dismiss();
     // Ask user if he wants to add more tasks
     Alert.alert(
       "Project Created Successfully!.",

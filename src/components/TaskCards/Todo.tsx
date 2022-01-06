@@ -6,12 +6,13 @@ import { BoxShadow } from "../HOC/withBoxShadow";
 import Text from "../Text";
 import { Ionicons as Icon, MaterialIcons } from "@expo/vector-icons";
 import { NavigationProp, useNavigation } from "@react-navigation/native";
-import { ScreensNavigationParams } from "../../../types";
+import { ScreensNavigationParams, Project as ProjectType } from "../../../types";
 import { useDispatch } from "react-redux";
 import {
   modifyProjectTaskStatus,
   removeProjectTask,
 } from "../../store/slices/projectsSlice";
+import store from "../../store";
 
 /** Type for project tasks that has "to-do" status*/
 type TodoProps = {
@@ -43,6 +44,12 @@ const Todo = ({
     setExpanded(!expanded);
   }, [expanded]);
   const handleDeleteTodo = React.useCallback(() => {
+    // Make sure its not the only task. We dont want a project with no tasks
+    const project = store.getState().projects.find(project => project.projectId === projectId) as ProjectType;
+    if(project.projectTasks.length === 1){
+      return alert("You can't delete all the tasks for a project.Each Project must have at-least one task at any given time")
+    }
+
     Alert.alert(
       "Confirm Delete",
       "Are you sure you want to delete this todo task?",
@@ -63,8 +70,15 @@ const Todo = ({
     [projectId, todoId]
   );
   const handleMoveToDoing = React.useCallback(() => {
+    let project:ProjectType | undefined = store.getState().projects.find(project => project.projectId === projectId);
+    // Error finding project with Id
+    if(!project) return alert("An Error Occurred.\nPlease try again, or contact us if issue persists.")
+    // Check if project already has an active tast i.e `doing`
+    if(project.projectTasks.find(task => task.taskStatus === "doing")){
+      return Alert.alert("Couldn't Process Request","There's a task with `doing` status already. You can't be doing more than one task at a time.")
+    }
     dispatch(modifyProjectTaskStatus({ taskId: todoId, taskStatus: "doing" }));
-  }, [todoId]);
+  }, [todoId, projectId]);
 
   return (
     <BoxShadow

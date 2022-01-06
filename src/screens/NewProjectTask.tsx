@@ -1,7 +1,7 @@
 import { StackScreenProps } from "@react-navigation/stack";
 import { ScreensNavigationParams } from "../../types";
 import * as React from "react";
-import { Alert, View } from "react-native";
+import { Alert, Keyboard, View } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../store";
 import { addProjectTask, projectSelector } from "../store/slices/projectsSlice";
@@ -55,6 +55,7 @@ const NewProjectTask = ({
       "Task Created Successfully!",
       `New task has been successfully created for project: "${project.projectName}"`
     );
+    Keyboard.dismiss();
     // Reset input
     setTaskDescription("");
     setTaskError("");
