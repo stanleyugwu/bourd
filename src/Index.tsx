@@ -5,6 +5,7 @@ import { registerRootComponent } from "expo";
 //redux store resources
 import { Provider } from "react-redux";
 import store from "./store";
+import { Persistor, persistStore } from "redux-persist";
 
 //navgation helpers
 import { NavigationContainer, Theme } from "@react-navigation/native";
@@ -22,8 +23,13 @@ import { ScreensNavigationParams } from "../types";
 import ProjectScreen from "./screens/Project";
 import EditProjectScreen from "./screens/EditProject";
 import EditProjectTaskScreen from "./screens/EditProjectTask";
+import { PersistGate } from "redux-persist/integration/react";
+import { ActivityIndicator } from "react-native";
 
 const Stack = createStackNavigator<ScreensNavigationParams>();
+
+// A persistor for redux store
+const storePersistor: Persistor = persistStore(store);
 
 const appTheme: Theme = {
   colors: {
@@ -43,26 +49,53 @@ const navigatorScreenOptions: StackNavigationOptions = {
   animationTypeForReplace: "pop",
   animationEnabled: true,
   transitionSpec: {
-    close: { animation: "spring", config: { friction: 10, tension:40 } },
-    open: { animation: "spring", config: { friction: 10, tension:40 } },
+    close: { animation: "spring", config: { friction: 10, tension: 40 } },
+    open: { animation: "spring", config: { friction: 10, tension: 40 } },
   },
   // animation: "slide_from_right",
   // statusBarStyle: "light",
 };
 
+const Loader: JSX.Element = (
+  <ActivityIndicator
+    animating
+    size={50}
+    style={{
+      justifyContent: "center",
+      alignItems: "center",
+      alignSelf: "center",
+      marginVertical: "auto",
+      marginHorizontal: "auto",
+    }}
+  />
+);
+
 function App(): JSX.Element {
   return (
     <Provider store={store}>
-      <NavigationContainer theme={appTheme}>
-        <Stack.Navigator screenOptions={navigatorScreenOptions}>
-          <Stack.Screen name="Projects" component={ProjectsScreen} />
-          <Stack.Screen name="NewProject" component={NewProjectScreen} options={{headerTitle:"Create New Project"}}/>
-          <Stack.Screen name="NewProjectTask" component={NewProjectTaskScreen} options={{headerTitle:"Create Project Task"}} />
-          <Stack.Screen name="Project" component={ProjectScreen} />
-          <Stack.Screen name="EditProject" component={EditProjectScreen} />
-          <Stack.Screen name="EditProjectTask" component={EditProjectTaskScreen} />
-        </Stack.Navigator>
-      </NavigationContainer>
+      <PersistGate persistor={storePersistor} loading={Loader}>
+        <NavigationContainer theme={appTheme}>
+          <Stack.Navigator screenOptions={navigatorScreenOptions}>
+            <Stack.Screen name="Projects" component={ProjectsScreen} />
+            <Stack.Screen
+              name="NewProject"
+              component={NewProjectScreen}
+              options={{ headerTitle: "Create New Project" }}
+            />
+            <Stack.Screen
+              name="NewProjectTask"
+              component={NewProjectTaskScreen}
+              options={{ headerTitle: "Create Project Task" }}
+            />
+            <Stack.Screen name="Project" component={ProjectScreen} />
+            <Stack.Screen name="EditProject" component={EditProjectScreen} />
+            <Stack.Screen
+              name="EditProjectTask"
+              component={EditProjectTaskScreen}
+            />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </PersistGate>
     </Provider>
   );
 }
