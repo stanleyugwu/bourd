@@ -25,6 +25,7 @@
       "supportsTablet": true
     },
     "android": {
+      "permissions": ["READ_EXTERNAL_STORAGE","WRITE_EXTERNAL_STORAGE"],
       "package": "com.devvie.bourd",
       "adaptiveIcon": {
         "backgroundColor": "#121330"
