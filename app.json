@@ -20,9 +20,12 @@
       "**/*"
     ],
     "ios": {
+      "bundleIdentifier": "com.devvie.bourd",
+      "requireFullScreen": true,
       "supportsTablet": true
     },
     "android": {
+      "package": "com.devvie.bourd",
       "adaptiveIcon": {
         "backgroundColor": "#121330"
       }
