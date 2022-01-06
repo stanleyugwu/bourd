@@ -44,6 +44,12 @@ const Todo = ({
     setExpanded(!expanded);
   }, [expanded]);
   const handleDeleteTodo = React.useCallback(() => {
+    // Make sure its not the only task. We dont want a project with no tasks
+    const project = store.getState().projects.find(project => project.projectId === projectId) as ProjectType;
+    if(project.projectTasks.length === 1){
+      return alert("You can't delete all the tasks for a project.Each Project must have at-least one task at any given time")
+    }
+
     Alert.alert(
       "Confirm Delete",
       "Are you sure you want to delete this todo task?",
