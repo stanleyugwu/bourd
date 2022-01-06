@@ -33,7 +33,11 @@ const Project = ({
   React.useEffect(() => {}, []);
 
   const dispatch = useDispatch();
-  const [activeTasksTab, setActiveTasksTab] = React.useState<1 | 2 | 3>(2);
+  const [activeTasksTab, setActiveTasksTab] = React.useState<1 | 2 | 3>(() =>
+    project.projectTasks.filter((task) => task.taskStatus == "doing").length > 0
+      ? 2
+      : 1
+  );
 
   /** The horizontal bar shown at the top of the active tab icon*/
   const ActiveTabBar = React.useMemo(
