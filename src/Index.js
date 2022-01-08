@@ -5,7 +5,7 @@ var __makeTemplateObject = (this && this.__makeTemplateObject) || function (cook
 };
 exports.__esModule = true;
 require("react-native-gesture-handler");
-var react_1 = require("react");
+var React = require("react");
 var expo_1 = require("expo");
 //redux store resources
 var react_redux_1 = require("react-redux");

@@ -14,7 +14,7 @@ import Button from "../components/Button";
 import TextInputField from "../components/TextInputField";
 import withTile from "../components/HOC/withTile";
 
-/** Screen for creating new project tasks */
+/** Screen for editing project */
 const EditProject = ({
   navigation,
   route,
@@ -79,7 +79,7 @@ const EditProject = ({
     );
     Keyboard.dismiss()
     navigation.navigate("Projects");
-  }, [projectName, project.projectId]);
+  }, [projectName, project.projectId, description]);
 
   // Graceful fallback for when no project with passed id exists,
   // or `handleDeleteProject` failed to navigate back to `Projects` screen after deletion
