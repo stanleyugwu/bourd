@@ -1,0 +1,1 @@
+global.console.warn = () => null;//disable console warnings
