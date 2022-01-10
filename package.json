@@ -1,6 +1,9 @@
 {
   "main": "./src/Index.js",
   "scripts": {
+    "test": "jest",
+    "test:watch": "jest --watchAll",
+    "test:ci":"jest --collectCoverage",
     "start": "expo start",
     "android": "expo start --android",
     "ios": "expo start --ios",
@@ -30,8 +33,17 @@
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
+    "@testing-library/react-native": "^9.0.0",
+    "@types/jest": "^27.4.0",
     "@types/react-native": "~0.64.12",
+    "@types/react-test-renderer": "^17.0.1",
+    "jest": "^26.0.0",
+    "jest-coverage-badges": "^1.1.2",
+    "jest-expo": "^44.0.1",
     "metro": "*",
+    "react-test-renderer": "^17.0.2",
+    "ts-jest": "^26.0.0",
+    "ts-node": "^10.4.0",
     "typescript": "~4.3.5"
   },
   "private": true
