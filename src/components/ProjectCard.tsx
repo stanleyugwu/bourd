@@ -17,7 +17,7 @@ export type ProjectCardProps = {
   /** Number of tasks the project has */
   numberOfTasks: number;
   /** Unique `Id` of the project */
-  projectId:string;
+  projectId: string;
   /** Number of tasks completed for the project */
   numberOfCompletedTasks: number;
   /** Title text to show as project name */
@@ -50,26 +50,46 @@ let ProjectCard = ({
     activeOpacity={0.9}
     style={tw.style(`max-w-md rounded-md`, containerStyle as ClassInput)}
     nativeID={projectId}
+    accessibilityLabel="project container button"
   >
-    <View style={tw.style(`pb-2`, containerStyle as ClassInput)}>
+    <View
+      style={tw.style(`pb-2`, containerStyle as ClassInput)}
+      accessibilityLabel="inner project wrapper"
+    >
       <View
         style={tw`bg-primary rounded-t-md py-1 px-3 justify-between flex-row overflow-visible`}
       >
-        <Text style={tw`text-gray-300 text-sm`}>Tasks: {numberOfTasks}</Text>
-        <Text style={tw`text-gray-300 text-sm `}>
+        <Text
+          style={tw`text-gray-300 text-sm`}
+          accessibilityLabel="number of tasks"
+        >
+          Tasks: {numberOfTasks}
+        </Text>
+        <Text
+          style={tw`text-gray-300 text-sm `}
+          accessibilityLabel="number of completed tasks"
+        >
           Done: {numberOfCompletedTasks}
         </Text>
         <View style={tw`flex-row`}>
           <Icon name="time-outline" size={19} color={tw.color("gray-300")} />
-          <Text style={tw`text-gray-300 ml-1 text-sm items-center`}>
+          <Text
+            style={tw`text-gray-300 ml-1 text-sm items-center`}
+            accessibilityLabel="project creation date"
+          >
             {dayjs(creationDate).fromNow()}
           </Text>
         </View>
       </View>
 
       <ScrollView style={tw`h-28 px-3 mt-3`} contentInset={{ bottom: 20 }}>
-        <Title>{projectTitle}</Title>
-        <Text style={tw`overflow-visible`}>{projectDescription}</Text>
+        <Title accessibilityLabel="project name">{projectTitle}</Title>
+        <Text
+          style={tw`overflow-visible`}
+          accessibilityLabel="project description"
+        >
+          {projectDescription}
+        </Text>
       </ScrollView>
     </View>
   </TouchableOpacity>
